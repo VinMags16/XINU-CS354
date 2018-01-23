@@ -17,7 +17,13 @@ process	main(void)
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 
-	/* Wait for shell to exit and recreate it */
+	/* Start onandon  */
+	int kidId = create((void*)onandon, 2048, 30, "onandon", 0, NULL);
+	resume(kidId);
+	sleep(14);
+	kill(kidId);
+
+	/* Wait for shell to exit and recreate it */	
 
 	while (TRUE) {
 		receive();
