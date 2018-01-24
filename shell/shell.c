@@ -10,7 +10,6 @@
 const	struct	cmdent	cmdtab[] = {
 	{"argecho",	TRUE,	xsh_argecho},
 	{"arp",		FALSE,	xsh_arp},
-	{"bestOS", 	FALSE,	xsh_bestOS},
 	{"cat",		FALSE,	xsh_cat},
 	{"clear",	TRUE,	xsh_clear},
 	{"date",	FALSE,	xsh_date},
@@ -20,6 +19,7 @@ const	struct	cmdent	cmdtab[] = {
 	{"help",	FALSE,	xsh_help},
 	{"ipaddr",	FALSE,	xsh_ipaddr},
 	{"kill",	TRUE,	xsh_kill},
+	{"lab1cmd",	FALSE,	xsh_lab1cmd},
 	{"memdump",	FALSE,	xsh_memdump},
 	{"memstat",	FALSE,	xsh_memstat},
 	{"ping",	FALSE,	xsh_ping},
