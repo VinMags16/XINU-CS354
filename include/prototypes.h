@@ -350,6 +350,9 @@ extern	void	pdumph(struct netpacket *);
 /* in file platinit.c */
 extern	void	platinit();
 
+/* in file prnsegadd.c */
+extern 	void	prnsegadd();
+
 /* in file ptclear.c */
 extern	void	_ptclear(struct ptentry *, uint16, int32 (*)(int32));
 
