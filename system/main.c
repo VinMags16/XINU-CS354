@@ -14,11 +14,15 @@ process	main(void)
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
 	
-	host2net(1);
+	//host2net(1);
 
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 	
+	resume(create((void*)stackoverflowA, 2048, 10, "overflowA", 0, NULL));
+	resume(create((void*)stackoverflowB, 2000, 15, "overflowB", 0, NULL));
+	sleepms(3000);	
+
 	/* Wait for shell to exit and recreate it */
 
 	while (TRUE) {

@@ -149,6 +149,9 @@ extern	status	getutime(uint32 *);
 /* in file halt.S */
 extern	void	halt(void);
 
+/* in file host2net.C */
+extern	long	host2net(long);
+
 /* in file icmp.c */
 
 extern	void	icmp_init(void);
@@ -566,6 +569,12 @@ extern	syscall	signaln(sid32, int32);
 /* in file sleep.c */
 extern	syscall	sleepms(uint32);
 extern	syscall	sleep(uint32);
+
+/* in file stackoverflowA.c */
+extern	void	stackoverflowA(void);
+
+/* in file stackoverflowB.c */
+extern	void	stackoverflowB(void);
 
 /* in file start.S */
 extern	int32	inb(int32);
