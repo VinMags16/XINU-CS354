@@ -1,7 +1,6 @@
 /*  main.c  - main */
 
 #include <xinu.h>
-#include <stdio.h>
 
 process	main(void)
 {
@@ -14,9 +13,12 @@ process	main(void)
 	kprintf("\n...creating a shell\n");
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
+	
+	host2net(1);
+
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
-
+	
 	/* Wait for shell to exit and recreate it */
 
 	while (TRUE) {
