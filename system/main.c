@@ -25,7 +25,10 @@ process	main(void)
 	
 	/* Part 4.2 code */
 	kprintf("\nBase of runtime stack = 0x%x : 0x%x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
-	// TODO use in-line assembly to print same info about top of stack
+	register long reg asm("esp");
+	kprintf("Top of runtime stack = 0x%x : ", reg);
+	char* bytes = reg;
+	printf("0x%04x\n\n", &bytes);
 
 	resume(create((void*)appl1, 2048, INITPRIO, "appl1", 0, NULL));	
 
