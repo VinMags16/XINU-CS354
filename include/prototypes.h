@@ -10,6 +10,10 @@ extern	int32	arp_alloc();
 extern	void	arp_ntoh(struct arppacket *);
 extern	void	arp_hton(struct arppacket *);
 
+/* in file appl1.c */
+extern	int	appl1(void);
+extern 	char	fun1(char, char);
+
 /* in file ascdate.c */
 
 extern	status	ascdate(uint32, char *);

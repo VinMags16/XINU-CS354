@@ -14,14 +14,24 @@ process	main(void)
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
 	
+	/* Part 3 code  */
 	//host2net(1);
+	
+	/* Part 4.1 code */	
+
+	//resume(create((void*)stackoverflowA, 2048, 10, "overflowA", 0, NULL));
+	//resume(create((void*)stackoverflowB, 2000, 15, "overflowB", 0, NULL));
+	//sleepms(3000);
+	
+	/* Part 4.2 code */
+	kprintf("\nBase of runtime stack = 0x%x : 0x%x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
+	// TODO use in-line assembly to print same info about top of stack
+
+	resume(create((void*)appl1, 2048, INITPRIO, "appl1", 0, NULL));	
+
 
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
-	
-	resume(create((void*)stackoverflowA, 2048, 10, "overflowA", 0, NULL));
-	resume(create((void*)stackoverflowB, 2000, 15, "overflowB", 0, NULL));
-	sleepms(3000);	
 
 	/* Wait for shell to exit and recreate it */
 
