@@ -15,7 +15,7 @@ process	main(void)
 	kprintf("\nvmaggiol\n");
 	
 	/* Part 3 code  */
-	//host2net(1);
+	host2neta(1);
 	
 	/* Part 4.1 code */	
 
@@ -24,14 +24,12 @@ process	main(void)
 	//sleepms(3000);
 	
 	/* Part 4.2 code */
-	kprintf("\nBase of runtime stack = 0x%x : 0x%x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
-	register long reg asm("esp");
-	kprintf("Top of runtime stack = 0x%x : ", reg);
-	char* bytes = reg;
-	printf("0x%04x\n\n", &bytes);
-
-	resume(create((void*)appl1, 2048, INITPRIO, "appl1", 0, NULL));	
-
+//	kprintf("\nBase of runtime stack = 0x%04x : 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
+//	register long reg asm("esp");
+//	kprintf("Top of runtime stack = 0x%x : ", reg);
+//	char* bytes = (char*)reg;
+//	kprintf("0x%04x\n\n", &bytes);
+//	resume(create((void*)appl1, 2048, INITPRIO+1, "appl1", 0, NULL));	
 
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
