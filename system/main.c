@@ -15,7 +15,8 @@ process	main(void)
 	kprintf("\nvmaggiol\n");
 	
 	/* Part 3 code  */
-	host2neta(1);
+//	host2net(1);
+//	host2neta(1);
 	
 	/* Part 4.1 code */	
 

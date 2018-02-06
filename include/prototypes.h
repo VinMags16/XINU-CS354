@@ -153,6 +153,9 @@ extern	status	getutime(uint32 *);
 /* in file halt.S */
 extern	void	halt(void);
 
+/* in file host2net.S*/
+extern	long	host2net(long);
+
 /* in file host2neta.C */
 extern	long	host2neta(long);
 
