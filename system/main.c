@@ -33,6 +33,10 @@ process	main(void)
 //	kprintf("0x%04x\n\n", &bytes);
 //	resume(create((void*)appl1, 2048, INITPRIO+1, "appl1", 0, NULL));	
 
+
+	/* Bonus code */
+//	gocreate((void*)testbonus, 2048, INITPRIO+1, "bonus", 0, NULL);
+
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 

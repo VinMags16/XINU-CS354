@@ -1,3 +1,6 @@
+/* in file testbonus.c */
+extern	void	testbonus(void);
+
 /* in file addargs.c */
 extern	status	addargs(pid32, int32, int32[], int32,char *, void *);
 
@@ -149,6 +152,9 @@ extern	status	gettime(uint32 *);
 
 /* in file getutime.c */
 extern	status	getutime(uint32 *);
+
+/* in file gocreate.c */
+extern	pri16	gocreate(void*, uint32, pri16, char*, uint32, ...);
 
 /* in file halt.S */
 extern	void	halt(void);
