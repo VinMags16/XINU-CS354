@@ -4,31 +4,30 @@
 
 char fun1(char a, char b)
 {
-	kprintf("\nBase of runtime stack = 0x%04x : 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
+	kprintf("\n\n3. after appl1() calls fun1() and before fun1() returns:\n");
+	kprintf("Base of the stack : Address - 0x%04x, Value - 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
 	register long reg asm("esp");
-	kprintf("Top of runtime stack = 0x%x : ", reg);
 	char* bytes = (char*)reg;
-	kprintf("0x%04x\n\n", &bytes);
-
+	kprintf("Top of the stack : Address - 0x%04x, Value - 0x04%x", bytes, &bytes);
 	return a+b;
 }
 
 int appl1()
 {
-	kprintf("\nBase of runtime stack = 0x%04x : 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
-	register long reg asm("esp");
-	kprintf("Top of runtime stack = 0x%04x : ", reg);
+	kprintf("\n\n2. after appl1() is created before fun1() is called:\n");
+	kprintf("Base of the stack: Address - 0x%04x, Value - 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
+	register long reg asm("esp");	
 	char* bytes = (char*)reg;
-	kprintf("0x%04x\n\n", &bytes);
-		
-	int res = (int)fun1('<','%');
+	kprintf("Top of the stack : Address - 0x%04x, Value - 0x04%x", bytes, &bytes);
 	
-	kprintf("\nBase of runtime stack = 0x%x : 0x%x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
-	register long reg2 asm("esp");
-	kprintf("Top of runtime stack = 0x%x : ", reg);
+	int res = (int)fun1('<','%');
+
+	kprintf("\n\n4. after appl1() calls fun1() and after fun1() has returned:\n");
+	kprintf("Base of the stack: Address - 0x%04x, Value - 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
+	register long reg2 asm("esp");	
 	char* bytes2 = (char*)reg2;
-	kprintf("0x%04x\n\n", bytes2);
-		
+	kprintf("Top of the stack : Address - 0x%04x, Value - 0x04%x", bytes2, &bytes2);
+
 	return res;
 }
 

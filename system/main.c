@@ -19,12 +19,6 @@ process	main(void)
 //	host2netca(1);
 //	host2neta(1);
 		
-	/* Part 4.1 code */	
-
-	//resume(create((void*)stackoverflowA, 2048, 10, "overflowA", 0, NULL));
-	//resume(create((void*)stackoverflowB, 2000, 15, "overflowB", 0, NULL));
-	//sleepms(3000);
-	
 	/* Part 4.2 code */
 //	kprintf("\nBase of runtime stack = 0x%04x : 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
 //	register long reg asm("esp");
@@ -33,20 +27,24 @@ process	main(void)
 //	kprintf("0x%04x\n\n", &bytes);
 //	resume(create((void*)appl1, 2048, INITPRIO+1, "appl1", 0, NULL));	
 
+	/* Part 5 code */	
+//	resume(create((void*)stackoverflowA, 2048, 10, "overflowA", 0, NULL));
+//	resume(create((void*)stackoverflowB, 2000, 15, "overflowB", 0, NULL));
+//	sleepms(3000);
 
 	/* Bonus code */
 //	gocreate((void*)testbonus, 2048, INITPRIO+1, "bonus", 0, NULL);
 
-	recvclr();
-	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
+//	recvclr();
+//	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 
 	/* Wait for shell to exit and recreate it */
 
-	while (TRUE) {
-		receive();
-		sleepms(200);
-		kprintf("\n\nMain process recreating shell\n\n");
-		resume(create(shell, 4096, 20, "shell", 1, CONSOLE));
-	}
+//	while (TRUE) {
+//		receive();
+//		sleepms(200);
+//		kprintf("\n\nMain process recreating shell\n\n");
+//		resume(create(shell, 4096, 20, "shell", 1, CONSOLE));
+//	}
 	return OK;
 }
