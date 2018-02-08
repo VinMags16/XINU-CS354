@@ -15,25 +15,22 @@ process	main(void)
 	kprintf("\nvmaggiol\n");
 	
 	/* Part 3 code  */
-//	host2net(1);
-//	host2netca(1);
-//	host2neta(1);
+	host2net(1);
+	host2netca(1);
+	host2neta(1);
 		
 	/* Part 4.2 code */
-//	kprintf("\nBase of runtime stack = 0x%04x : 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
-//	register long reg asm("esp");
-//	kprintf("Top of runtime stack = 0x%x : ", reg);
-//	char* bytes = (char*)reg;
-//	kprintf("0x%04x\n\n", &bytes);
-//	resume(create((void*)appl1, 2048, INITPRIO+1, "appl1", 0, NULL));	
+	kprintf("\n1. main process before appl1():\n");
+	kprintf("Base of the stack : Address - 0x%04x, Value - 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
+	register long reg asm("esp");
+	char* bytes = (char*)reg;
+	kprintf("Top of the stack : Address - 0x%04x, Value - 0x04%x\n\n", bytes, &bytes);
+	resume(create((void*)appl1, 2048, INITPRIO+1, "appl1", 0, NULL));	
 
 	/* Part 5 code */	
-//	resume(create((void*)stackoverflowA, 2048, 10, "overflowA", 0, NULL));
-//	resume(create((void*)stackoverflowB, 2000, 15, "overflowB", 0, NULL));
-//	sleepms(3000);
-
-	/* Bonus code */
-//	gocreate((void*)testbonus, 2048, INITPRIO+1, "bonus", 0, NULL);
+	resume(create((void*)stackoverflowA, 2048, 10, "overflowA", 0, NULL));
+	resume(create((void*)stackoverflowB, 2000, 15, "overflowB", 0, NULL));
+	sleepms(3000);
 
 //	recvclr();
 //	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));

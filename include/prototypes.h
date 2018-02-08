@@ -1,6 +1,3 @@
-/* in file testbonus.c */
-extern	void	testbonus(void);
-
 /* in file addargs.c */
 extern	status	addargs(pid32, int32, int32[], int32,char *, void *);
 
@@ -165,7 +162,7 @@ extern	long	host2net(long);
 /* in file host2neta.c */
 extern	long	host2neta(long);
 
-/* in file host2netca.c */
+/* in file host2netca.s */
 extern	long	host2netca(long);
 
 /* in file icmp.c */
