@@ -3,6 +3,7 @@
 #include <xinu.h>
 
 uint32	clktime;		/* Seconds since boot			*/
+uint32	clkmilli;		/* Milliseconds since boot		*/
 uint32	ctr1000 = 0;		/* Milliseconds since boot		*/
 qid16	sleepq;			/* Queue of sleeping processes		*/
 uint32	preempt;		/* Preemption counter			*/
@@ -27,6 +28,13 @@ void	clkinit(void)
 
 	clktime = 0;
 
+	/* Vincent Maggioli 2/13 */
+	/* Initialize the time since boot to zero */
+
+	clkmilli = 0;
+
+	/* end changes */
+	
 	/* Set interrupt vector for the clock to invoke clkdisp */
 
 	set_evec(IRQBASE, (uint32)clkdisp);

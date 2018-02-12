@@ -2,6 +2,8 @@
 
 #include <xinu.h>
 
+#define DEBUG 0
+
 struct	defer	Defer;
 
 /*------------------------------------------------------------------------
@@ -12,9 +14,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 {
 	struct procent *ptold;	/* Ptr to table entry for old process	*/
 	struct procent *ptnew;	/* Ptr to table entry for new process	*/
-	/* vmaggiol */
-	uint32 prctxswbeg;	/* Time process was switched in		*/	
-
+	
 	/* If rescheduling is deferred, record attempt and return */
 
 	if (Defer.ndefers > 0) {
@@ -45,8 +45,16 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	/* Vincent Maggioli 2/13 */
 	/* Adds cpu usage to process getting swapped out */
 	/* Sets beginning time in ms for new process */
-	ptold->prcputot += (clkmilli - ptold->prctxswbeg);
-	ptnew->prcprctxswbeg = clkmilli;
+	
+	uint32 consumedTime = clkmilli - ptold->prctxswbeg;
+	ptold->prcputot += consumedTime;
+	ptnew->prctxswbeg = clkmilli;
+	
+	/* Print values on context switch if debugging */
+	#ifdef DEBUG
+		kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
+	#endif
+
 	/* end changes */
 
 	ptnew->prstate = PR_CURR;

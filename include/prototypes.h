@@ -1,3 +1,6 @@
+/* in file test.c */
+extern	void	test(void);
+
 /* in file addargs.c */
 extern	status	addargs(pid32, int32, int32[], int32,char *, void *);
 
@@ -122,6 +125,9 @@ extern	char	*getbuf(bpid32);
 
 /* in file getc.c */
 extern	syscall	getc(did32);
+
+/* in file getcpuused.c */
+extern	syscall	getcputot(pid32);
 
 /* in file getitem.c */
 extern	pid32	getfirst(qid16);

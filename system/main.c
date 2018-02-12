@@ -14,10 +14,14 @@ process	main(void)
 	kprintf("\n...creating a shell\n");
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
-	recvclr();
-	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
+	
+	resume(create((void*)test, 2048, 20, "test1", 0, NULL));
+	resume(create((void*)test, 2048, 20, "test2", 0, NULL));
+	resume(create((void*)test, 2048, 20, "test3", 0, NULL));
+	resume(create((void*)test, 2048, 20, "test4", 0, NULL));
 
-	/* Wait for shell to exit and recreate it */
+	/*recvclr();
+	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 
 	while (TRUE) {
 		receive();
@@ -25,5 +29,5 @@ process	main(void)
 		kprintf("\n\nMain process recreating shell\n\n");
 		resume(create(shell, 4096, 20, "shell", 1, CONSOLE));
 	}
-	return OK;
+	return OK;*/
 }

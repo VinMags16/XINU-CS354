@@ -52,7 +52,12 @@ pid32	create(
 	prptr->prsem = -1;
 	prptr->prparent = (pid32)getpid();
 	prptr->prhasmsg = FALSE;
+	/* Vincent Maggioli 2/13 */
+	/* Initiazlie cpu total  */
+	
 	prptr->prcputot = 1;
+	
+	/* End changes */	
 
 	/* Set up stdin, stdout, and stderr descriptors for the shell	*/
 	prptr->prdesc[0] = CONSOLE;

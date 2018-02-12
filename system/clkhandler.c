@@ -25,7 +25,7 @@ void	clkhandler()
 
 	/* Increment the milli counter */
 
-	clkmini++;
+	clkmilli++;
 
 	/* Handle sleeping processes if any exist */
 
