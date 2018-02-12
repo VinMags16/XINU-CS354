@@ -13,7 +13,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	struct procent *ptold;	/* Ptr to table entry for old process	*/
 	struct procent *ptnew;	/* Ptr to table entry for new process	*/
 	/* vmaggiol */
-//	uint32 prctxswbeg;	/* Time process was switched in		*/	
+	uint32 prctxswbeg;	/* Time process was switched in		*/	
 
 	/* If rescheduling is deferred, record attempt and return */
 
@@ -41,6 +41,14 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
+	
+	/* Vincent Maggioli 2/13 */
+	/* Adds cpu usage to process getting swapped out */
+	/* Sets beginning time in ms for new process */
+	ptold->prcputot += (clkmilli - ptold->prctxswbeg);
+	ptnew->prcprctxswbeg = clkmilli;
+	/* end changes */
+
 	ptnew->prstate = PR_CURR;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
