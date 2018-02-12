@@ -12,7 +12,6 @@ extern	void	arp_hton(struct arppacket *);
 
 /* in file appl1.c */
 extern	int	appl1(void);
-extern 	char	fun1(char, char);
 
 /* in file ascdate.c */
 
@@ -120,6 +119,9 @@ extern	syscall	freebuf(char *);
 
 /* in file freemem.c */
 extern	syscall	freemem(char *, uint32);
+
+/* in file fun1.c */
+extern	char	fun1(char, char);
 
 /* in file getbuf.c */
 extern	char	*getbuf(bpid32);
