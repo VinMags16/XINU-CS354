@@ -15,15 +15,15 @@ process	main(void)
 	kprintf("\nvmaggiol\n");
 	
 	/* Part 3 code  */
-	host2net(1);
-	host2netca(1);
-	host2neta(1);
+	kprintf("\nhost2net(1) = 0x%04x : 0x%04x\n", 1, host2net(1));
+	kprintf("host2netca(1) = 0x%04x : 0x%04x\n", 1, host2netca(1));
+	kprintf("host2neta(1) = 0x%04x : 0x%04x\n", 1, host2neta(1));
 		
 	/* Part 4.2 code */
 	kprintf("\n1. main process before appl1():\n");
 	kprintf("Base of the stack : Address - 0x%04x, Value - 0x%04x\n", proctab[currpid].prstkbase, &(proctab[currpid].prstkbase));
-	register long reg asm("esp");
-	char* bytes = (char*)reg;
+	register char* reg asm("esp");
+	char* bytes = reg;
 	kprintf("Top of the stack : Address - 0x%04x, Value - 0x04%x\n\n", bytes, &bytes);
 	resume(create((void*)appl1, 2048, INITPRIO+1, "appl1", 0, NULL));	
 
