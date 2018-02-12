@@ -12,6 +12,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 {
 	struct procent *ptold;	/* Ptr to table entry for old process	*/
 	struct procent *ptnew;	/* Ptr to table entry for new process	*/
+	/* vmaggiol */
+//	uint32 prctxswbeg;	/* Time process was switched in		*/	
 
 	/* If rescheduling is deferred, record attempt and return */
 
