@@ -1,1 +1,1 @@
-#define UPBOUND	1000000
+#define UPBOUND 1000000

@@ -14,12 +14,16 @@ process	main(void)
 	kprintf("\n...creating a shell\n");
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
-	
-	resume(create((void*)test, 2048, 20, "test1", 0, NULL));
-	resume(create((void*)test, 2048, 20, "test2", 0, NULL));
-	resume(create((void*)test, 2048, 20, "test3", 0, NULL));
-	resume(create((void*)test, 2048, 20, "test4", 0, NULL));
 
+	/* Part 3 testing */	
+	resume(create((void*)test, 2048, 1, "test1", 0, NULL));
+	resume(create((void*)test, 2048, 5, "test2", 0, NULL));
+	resume(create((void*)test, 2048, 10, "test3", 0, NULL));
+	resume(create((void*)test, 2048, 15, "test4", 0, NULL));
+
+	/* 4.2 */
+	
+	
 	/*recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 
