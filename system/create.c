@@ -43,7 +43,12 @@ pid32	create(
 
 	/* Initialize process table entry for new process */
 	prptr->prstate = PR_SUSP;	/* Initial state is suspended	*/
-	prptr->prprio = priority;
+	
+	/* Vincent Maggioli 2/13 */
+	/* Init new priority */
+	prptr->prprio = INITPRIO - 1;
+	/* End changes */
+	
 	prptr->prstkbase = (char *)saddr;
 	prptr->prstklen = ssize;
 	prptr->prname[PNMLEN-1] = NULLCH;

@@ -25,7 +25,9 @@
 /* Process initialization constants */
 
 #define	INITSTK		65536	/* Initial process stack size		*/
-#define	INITPRIO	20	/* Initial process priority		*/
+/* Vincent Maggioli 2/13 */
+/* Changed INITPRIO to match new initialization, added MAXPRIO */
+#define	INITPRIO	32766	/* Initial process priority		*/
 #define MAXPRIO		32767	/* Max priority				*/
 #define	INITRET		userret	/* Address to which process returns	*/
 

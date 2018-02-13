@@ -23,9 +23,10 @@ void	clkhandler()
 		count1000 = 1000;
 	}
 
-	/* Increment the milli counter */
+	/* Increment the milli counter and cpu usage */
 
 	clkmilli++;
+	proctab[currpid].prcputot++;
 
 	/* Handle sleeping processes if any exist */
 

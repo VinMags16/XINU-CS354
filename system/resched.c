@@ -26,6 +26,29 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
+	/* Vincent Maggioli 2/13 */
+	/* Adds cpu usage to process getting swapped out */
+	
+	uint32 consumedTime = clkmilli - ptold->prctxswbeg;
+	ptold->prcputot += consumedTime;
+	
+	/* Set new priority */
+	
+	if ((ptold->prprio = MAXPRIO - ptold->prcputot) < 1) {
+		ptold->prprio = 1;
+	}
+	
+	/* Print values on context switch if debugging */
+	#ifdef DEBUG
+		if (currpid > 2) {
+			kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
+		}
+	#endif
+
+	/* End changes */
+
+	/* Sets beginning time in ms for new process */
+
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		if (ptold->prprio > firstkey(readylist)) {
 			return;
@@ -41,24 +64,14 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
-	
+
 	/* Vincent Maggioli 2/13 */
-	/* Adds cpu usage to process getting swapped out */
-	
-	uint32 consumedTime = clkmilli - ptold->prctxswbeg;
-	ptold->prcputot += consumedTime;
-	
-	/* Sets beginning time in ms for new process */
-	
+	/* Set new start time for new current process */
+
 	ptnew->prctxswbeg = clkmilli;
+
+	/* End changes */
 	
-	/* Print values on context switch if debugging */
-	#ifdef DEBUG
-		kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
-	#endif
-
-	/* end changes */
-
 	ptnew->prstate = PR_CURR;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
