@@ -44,10 +44,12 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	
 	/* Vincent Maggioli 2/13 */
 	/* Adds cpu usage to process getting swapped out */
-	/* Sets beginning time in ms for new process */
 	
 	uint32 consumedTime = clkmilli - ptold->prctxswbeg;
 	ptold->prcputot += consumedTime;
+	
+	/* Sets beginning time in ms for new process */
+	
 	ptnew->prctxswbeg = clkmilli;
 	
 	/* Print values on context switch if debugging */
