@@ -17,5 +17,8 @@ syscall getcputot(pid32 pid)
 	/* Get process and return its cpu total */
 	prptr = &proctab[pid];
 	restore(mask);
+	if (prptr->prstate == PR_CURR) {
+		return prptr->prcputot + (clkmilli - prptr->prctxswbeg);
+	}
 	return prptr->prcputot;
 }

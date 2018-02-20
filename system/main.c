@@ -15,15 +15,24 @@ process	main(void)
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
 
-	/* Part 3 testing */	
-	resume(create((void*)test, 2048, 1, "test1", 0, NULL));
-	resume(create((void*)test, 2048, 5, "test2", 0, NULL));
-	resume(create((void*)test, 2048, 10, "test3", 0, NULL));
-	resume(create((void*)test, 2048, 15, "test4", 0, NULL));
+	/* Part 3 */	
+//	resume(create((void*)test, 2048, 1, "test1", 0, NULL));
+//	resume(create((void*)test, 2048, 5, "test2", 0, NULL));
+//	resume(create((void*)test, 2048, 10, "test3", 0, NULL));
+//	resume(create((void*)test, 2048, 15, "test4", 0, NULL));
 
-	/* 4.2 */
+	/* Part 4 */
+//	resume(create((void*)iobound, 2048, 50, "cpubound1", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "cpubound2", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "cpubound3", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "cpubound4", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "cpubound5", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "cpubound6", 0, NULL));
 	
-	
+	/* Kill main */
+
+	kill(2);
+
 	/*recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 

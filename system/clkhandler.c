@@ -23,10 +23,13 @@ void	clkhandler()
 		count1000 = 1000;
 	}
 
+	/* Vincent Maggioli 2/13 */
 	/* Increment the milli counter and cpu usage */
 
 	clkmilli++;
 	proctab[currpid].prcputot++;
+
+	/* End changes */
 
 	/* Handle sleeping processes if any exist */
 

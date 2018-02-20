@@ -49,6 +49,10 @@ extern	syscall	close(did32);
 
 extern	syscall	control(did32, int32, int32, int32);
 
+/* in file cpubound.c */
+
+extern	void	cpubound(void);
+
 /* in file create.c */
 
 extern	pid32	create(void *, uint32, pri16, char *, uint32, ...);
@@ -182,6 +186,9 @@ extern	status	insertd(pid32, qid16, int32);
 
 /* in file intr.S */
 extern	uint16	getirmask(void);
+
+/* in file iobound.c */
+extern	void	iobound(void);
 
 /* in file ioerr.c */
 extern	devcall	ioerr(void);

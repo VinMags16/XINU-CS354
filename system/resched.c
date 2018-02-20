@@ -32,14 +32,16 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	uint32 consumedTime = clkmilli - ptold->prctxswbeg;
 	ptold->prcputot += consumedTime;
 	
-	/* Set new priority */
-	
-	if ((ptold->prprio = MAXPRIO - ptold->prcputot) < 1) {
+	/* Set new priority - check if it's nulluser() */
+	if (ptold->prpid == 1) {
+		ptold->prprio = 0;		
+	} else if ((ptold->prprio = MAXPRIO - ptold->prcputot) < 1) {
 		ptold->prprio = 1;
 	}
 	
 	/* Print values on context switch if debugging */
 	#ifdef DEBUG
+		/* Only printing user processes */
 		if (currpid > 2) {
 			kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
 		}
@@ -51,6 +53,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		if (ptold->prprio > firstkey(readylist)) {
+			/* Vincent Maggioli 2/13 */
+			/* Set new beginning for same process */
+			ptold->prctxswbeg = clkmilli;
+			/* End changes */
 			return;
 		}
 
