@@ -636,6 +636,15 @@ extern	syscall	unsleep(pid32);
 /* in file userret.c */
 extern	void	userret(void);
 
+/* in file xts_dequeue.c */
+extern	pid32	xts_dequeue(void);
+
+/* in file xts_enqueue.c */
+extern	int	xts_enqueue(pid32 pid, pri16 prio);
+
+/* in file xts_priochk.c */
+extern	pri16	xts_priochk(void);
+
 /* in file wait.c */
 extern	syscall	wait(sid32);
 

@@ -4,6 +4,13 @@
 
 #include <xinu.h>
 #include <string.h>
+#include <xts_init.h>
+
+/* Vincent Maggioli */
+
+#define SOLTS 60		/* Solaris time scheduling constant	*/
+
+/* End changes */
 
 extern	void	start(void);	/* Start of Xinu code			*/
 extern	void	*_end;		/* End of Xinu code			*/
@@ -170,6 +177,18 @@ static	void	sysinit()
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
 	}
+
+	/* Vincent Maggioli */
+	/* Initialize Solaris time scheduling */
+	
+	struct xts_tab xts_conf[SOLTS];
+
+	/* Initialize Multi-feedback queue */
+
+	struct xts_multifb xts_ready[SOLTS];
+
+	/* End changes */
+
 	return;
 }
 
