@@ -169,6 +169,17 @@ static	void	sysinit()
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
+	
+	/* Vincent Maggioli */
+	/* Initialize all levels of multi-level feedback queue */
+
+	for (int i = 0; i < 60; i++) {
+		qid16 queue = newqueue();
+		xts_ready[i].queue_head = queue;
+		xts_ready[i].queue_tail = queue;
+	}
+
+	/* End changes*/
 
 	/* Initialize the real time clock */
 
