@@ -43,7 +43,12 @@ void	clkhandler()
 	/*   remaining time reaches zero			     */
 
 	if((--preempt) <= 0) {
-		preempt = QUANTUM;
+		/* Vincent Maggioli */
+		/* Since preempt needs to be set based upon what process runs, set it in resched() */
+
+		//preempt = QUANTUM;
+
+		/* End changes */
 		resched();
 	}
 }

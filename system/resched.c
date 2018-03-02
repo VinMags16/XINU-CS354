@@ -26,14 +26,35 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
+	/* Vincent Maggioli */
+	/* Set new priority based on I/O or CPU bound */
+
+	pri16 currPrio = ptold->prprio;
+	if (preempt <= 0) {
+		/* CPU Bound */
+		ptold->prprio = xts_conf[currPrio].xts_tqexp;	
+	} else {
+		/* IO Bound */
+		ptold->prprio = xts_conf[currPrio].xts_slpret;
+	}
+	
+	/* End changes */
+
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
-		if (ptold->prprio > firstkey(readylist)) {
+		/* Vincent Maggioli */
+		/* Modify readylist check to use xts_priochk  */
+		if (ptold->prprio > xts_priochk()) {
+			/* Set proper new preempt based on new prio */
+			preempt = xts_conf[ptold->prprio].xts_quantum;
 			return;
 		}
+
+		/* End changes */
 
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
+
 		insert(currpid, readylist, ptold->prprio);
 	}
 
@@ -49,6 +70,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	uint32 consumedTime = clkmilli - ptold->prctxswbeg;
 	ptold->prcputot += consumedTime;
 	ptnew->prctxswbeg = clkmilli;
+
+	/* Set new preempt based on new prio */
+	
+	preempt = xts_conf[ptnew->prprio].xts_quantum;
 	
 	/* Print values on context switch if debugging */
 	#ifdef DEBUG
