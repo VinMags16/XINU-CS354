@@ -30,19 +30,29 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	/* Set new priority based on I/O or CPU bound */
 
 	pri16 currPrio = ptold->prprio;
-	if (preempt <= 0) {
+//	#ifdef DEBUG
+//		kprintf("%d\n", currpid);
+//	#endif
+	if (preempt <= 0 && currpid != 0) {
 		/* CPU Bound */
 		ptold->prprio = xts_conf[currPrio].xts_tqexp;	
-	} else {
+	} else if (currpid != 0) {
 		/* IO Bound */
 		ptold->prprio = xts_conf[currPrio].xts_slpret;
 	}
+	
+//	#ifdef DEBUG
+//		kprintf("Process %s new prio: %d\n", ptold->prname, ptold->prprio);
+//	#endif
 	
 	/* End changes */
 
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		/* Vincent Maggioli */
 		/* Modify readylist check to use xts_priochk  */
+		#ifdef DEBUG
+			kprintf("xts_priochk(): %d\n", xts_priochk());
+		#endif
 		if (ptold->prprio > xts_priochk()) {
 			/* Set proper new preempt based on new prio */
 			preempt = xts_conf[ptold->prprio].xts_quantum;
@@ -55,12 +65,16 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 		ptold->prstate = PR_READY;
 
-		insert(currpid, readylist, ptold->prprio);
+		xts_enqueue(currpid, ptold->prprio);
+
+//		#ifdef DEBUG
+//			kprintf("%d\n", queuetab[xts_ready[ptold->prprio].queue_tail].qprev);
+//		#endif
 	}
 
 	/* Force context switch to highest priority ready process */
 
-	currpid = dequeue(readylist);
+	currpid = xts_dequeue();
 	ptnew = &proctab[currpid];
 	
 	/* Vincent Maggioli 2/13 */
@@ -76,9 +90,9 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	preempt = xts_conf[ptnew->prprio].xts_quantum;
 	
 	/* Print values on context switch if debugging */
-	#ifdef DEBUG
-		kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
-	#endif
+//	#ifdef DEBUG
+//		kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
+//	#endif
 
 	/* end changes */
 

@@ -3,16 +3,16 @@
 #include <xinu.h>
 
 int xts_enqueue(pid32 pid, pri16 prio)
-{	
-
+{
 	/* Check if arguments are okay */
-	if (isbadpid(pid) || prio < 0 || prio > SOLTS-1) {
+	if (isbadpid(pid) || prio < 0) {
 		return -1;
+	} else if (prio > SOLTS - 1) {
+		prio = 59;
 	}
 
 	/* Insert process into ready list */
-	struct xts_multifb level = xts_ready[prio];
-	enqueue(pid, level.queue_head);
-	level.status = 1;
+	enqueue(pid, xts_ready[prio].queue_head);
+	xts_ready[prio].status = 1;
 	return 0;
 }

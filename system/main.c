@@ -15,14 +15,19 @@ process	main(void)
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
 
-	/* Part 3 testing */	
-	resume(create((void*)test, 2048, 1, "test1", 0, NULL));
-	resume(create((void*)test, 2048, 5, "test2", 0, NULL));
-	resume(create((void*)test, 2048, 10, "test3", 0, NULL));
-	resume(create((void*)test, 2048, 15, "test4", 0, NULL));
+		
+	resume(create((void*)cpubound, 2048, 1, "cpu1", 0, NULL));
+	kprintf("Here main\n");
+	resume(create((void*)cpubound, 2048, 5, "cpu2", 0, NULL));
+	kprintf("Here main\n");
+	resume(create((void*)cpubound, 2048, 10, "cpu3", 0, NULL));
+	kprintf("Here main\n");
+	resume(create((void*)cpubound, 2048, 15, "cpu4", 0, NULL));
+	kprintf("Here main\n");
+	resume(create((void*)cpubound, 2048, 20, "cpu4", 0, NULL));
+	kprintf("Here main\n");
 
-	/* 4.2 */
-	
+	kill(2);	
 	
 	/*recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));

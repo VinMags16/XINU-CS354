@@ -79,11 +79,10 @@ void	nulluser()
 		(uint32)&data, (uint32)&ebss - 1);
 
 	/* Enable interrupts */
-
+	kprintf("Before enable\n");
 	enable();
-
+	kprintf("After enable\n");
 	/* Create a process to execute function main() */
-
 	resume (
 	   create((void *)main, INITSTK, INITPRIO, "Main process", 0,
            NULL));

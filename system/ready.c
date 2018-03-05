@@ -1,6 +1,7 @@
 /* ready.c - ready */
 
 #include <xinu.h>
+#define DEBUG 0
 
 qid16	readylist;			/* Index of ready list		*/
 
@@ -22,7 +23,16 @@ status	ready(
 
 	prptr = &proctab[pid];
 	prptr->prstate = PR_READY;
-	insert(pid, readylist, prptr->prprio);
+	/* Vincent Maggioli */
+	/* Insert into multi level feedback queue */
+
+	#ifdef DEBUG
+		kprintf("Enqueueing process %s\n", prptr->prname);
+	#endif	
+	xts_enqueue(pid, prptr->prprio);
+
+	/* End changes */
+
 	resched();
 
 	return OK;
