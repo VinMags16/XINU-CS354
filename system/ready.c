@@ -1,7 +1,7 @@
 /* ready.c - ready */
 
 #include <xinu.h>
-#define DEBUG 0
+//#define DEBUG 0
 
 qid16	readylist;			/* Index of ready list		*/
 

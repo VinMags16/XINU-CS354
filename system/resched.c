@@ -2,7 +2,7 @@
 
 #include <xinu.h>
 
-#define DEBUG 0
+//#define DEBUG 0
 
 struct	defer	Defer;
 
@@ -28,22 +28,23 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	/* Vincent Maggioli */
 	/* Set new priority based on I/O or CPU bound */
-
-	pri16 currPrio = ptold->prprio;
-//	#ifdef DEBUG
-//		kprintf("%d\n", currpid);
-//	#endif
+	#ifdef DEBUG
+		kprintf("Current preempt: %d\n", preempt);
+	#endif
+	pri16 currPri = ptold->prprio;
 	if (preempt <= 0 && currpid != 0) {
 		/* CPU Bound */
-		ptold->prprio = xts_conf[currPrio].xts_tqexp;	
+		ptold->prprio = xts_conf[ptold->prprio].xts_tqexp;	
+		kprintf("CPU Bound: %s\nOld: %d\tNew: %d\n\n", ptold->prname, currPri, ptold->prprio);	
 	} else if (currpid != 0) {
 		/* IO Bound */
-		ptold->prprio = xts_conf[currPrio].xts_slpret;
+		kprintf("IO Bound: %s\n", ptold->prname);
+		ptold->prprio = xts_conf[ptold->prprio].xts_slpret;
 	}
 	
-//	#ifdef DEBUG
-//		kprintf("Process %s new prio: %d\n", ptold->prname, ptold->prprio);
-//	#endif
+	#ifdef DEBUG
+		kprintf("Process %s new prio: %d\n", ptold->prname, ptold->prprio);
+	#endif
 	
 	/* End changes */
 
@@ -53,23 +54,24 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		#ifdef DEBUG
 			kprintf("xts_priochk(): %d\n", xts_priochk());
 		#endif
+		kprintf("prprio = %d\txts_priochk() = %d\n", ptold->prprio, xts_priochk());
 		if (ptold->prprio > xts_priochk()) {
 			/* Set proper new preempt based on new prio */
 			preempt = xts_conf[ptold->prprio].xts_quantum;
 			return;
 		}
 
-		/* End changes */
-
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
 
-		xts_enqueue(currpid, ptold->prprio);
+		/* Enqueue process into multi-level fq */	
 
-//		#ifdef DEBUG
-//			kprintf("%d\n", queuetab[xts_ready[ptold->prprio].queue_tail].qprev);
-//		#endif
+		xts_enqueue(currpid, ptold->prprio);
+		#ifdef DEBUG
+			kprintf("%d\n", queuetab[xts_ready[ptold->prprio].queue_tail].qprev);
+		#endif
+		
 	}
 
 	/* Force context switch to highest priority ready process */
@@ -77,7 +79,6 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	currpid = xts_dequeue();
 	ptnew = &proctab[currpid];
 	
-	/* Vincent Maggioli 2/13 */
 	/* Adds cpu usage to process getting swapped out */
 	/* Sets beginning time in ms for new process */
 	
@@ -85,19 +86,20 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptold->prcputot += consumedTime;
 	ptnew->prctxswbeg = clkmilli;
 
-	/* Set new preempt based on new prio */
+	/* Set preempt based on new prio */
 	
 	preempt = xts_conf[ptnew->prprio].xts_quantum;
 	
 	/* Print values on context switch if debugging */
-//	#ifdef DEBUG
-//		kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
-//	#endif
+	#ifdef DEBUG
+		if (currpid != 0) {
+			kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
+		}
+	#endif
 
-	/* end changes */
+	/* End changes */
 
 	ptnew->prstate = PR_CURR;
-	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */

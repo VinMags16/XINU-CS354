@@ -2,6 +2,8 @@
 
 #include <xinu.h>
 
+#define DEBUG 0
+
 /*------------------------------------------------------------------------
  * clkhandler - high level clock interrupt handler
  *------------------------------------------------------------------------
@@ -43,7 +45,6 @@ void	clkhandler()
 	/*   remaining time reaches zero			     */
 
 	if((--preempt) <= 0) {
-		preempt = QUANTUM;
 		resched();
 	}
 }
