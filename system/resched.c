@@ -31,14 +31,17 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	#ifdef DEBUG
 		kprintf("Current preempt: %d\n", preempt);
 	#endif
-	pri16 currPri = ptold->prprio;
 	if (preempt <= 0 && currpid != 0) {
 		/* CPU Bound */
+		#ifdef DEBUG 
+			kprintf("CPU Bound: %s\n", ptold->prname);
+		#endif
 		ptold->prprio = xts_conf[ptold->prprio].xts_tqexp;	
-		kprintf("CPU Bound: %s\nOld: %d\tNew: %d\n\n", ptold->prname, currPri, ptold->prprio);	
 	} else if (currpid != 0) {
 		/* IO Bound */
-		kprintf("IO Bound: %s\n", ptold->prname);
+		#ifdef DEBUG
+			kprintf("IO Bound: %s\n", ptold->prname);
+		#endif
 		ptold->prprio = xts_conf[ptold->prprio].xts_slpret;
 	}
 	
@@ -54,7 +57,6 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		#ifdef DEBUG
 			kprintf("xts_priochk(): %d\n", xts_priochk());
 		#endif
-		kprintf("prprio = %d\txts_priochk() = %d\n", ptold->prprio, xts_priochk());
 		if (ptold->prprio > xts_priochk()) {
 			/* Set proper new preempt based on new prio */
 			preempt = xts_conf[ptold->prprio].xts_quantum;
@@ -77,6 +79,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	/* Force context switch to highest priority ready process */
 
 	currpid = xts_dequeue();
+	if (currpid == 0) {
+		xts_enqueue(0, 0);
+		currpid = xts_dequeue();
+	}
 	ptnew = &proctab[currpid];
 	
 	/* Adds cpu usage to process getting swapped out */
@@ -92,9 +98,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	
 	/* Print values on context switch if debugging */
 	#ifdef DEBUG
-		if (currpid != 0) {
-			kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
-		}
+		kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
 	#endif
 
 	/* End changes */
