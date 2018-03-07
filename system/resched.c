@@ -97,9 +97,11 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	preempt = xts_conf[ptnew->prprio].xts_quantum;
 	
 	/* Print values on context switch if debugging */
-	#ifdef DEBUG
-		kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
-	#endif
+	//#ifdef DEBUG
+		if (currpid != 0) {
+			kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
+		}
+	//#endif
 
 	/* End changes */
 
