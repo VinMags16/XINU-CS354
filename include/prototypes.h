@@ -1,3 +1,12 @@
+/* in file cputest.c */
+extern	void	cputest(void);
+
+/* in file iotest.c */
+extern	void	iotest(void);
+
+/* in file mixedtest.c */
+extern	void	mixedtest(void);
+
 /* in file test.c */
 extern	void	test(void);
 
