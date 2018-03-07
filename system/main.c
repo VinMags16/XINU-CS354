@@ -22,12 +22,12 @@ process	main(void)
 //	resume(create((void*)test, 2048, 15, "test4", 0, NULL));
 
 	/* Part 4 */
-//	resume(create((void*)iobound, 2048, 50, "cpubound1", 0, NULL));
-//	resume(create((void*)iobound, 2048, 50, "cpubound2", 0, NULL));
-//	resume(create((void*)iobound, 2048, 50, "cpubound3", 0, NULL));
-//	resume(create((void*)iobound, 2048, 50, "cpubound4", 0, NULL));
-//	resume(create((void*)iobound, 2048, 50, "cpubound5", 0, NULL));
-//	resume(create((void*)iobound, 2048, 50, "cpubound6", 0, NULL));
+//	resume(create((void*)cpubound, 2048, 50, "cpubound1", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "iobound1", 0, NULL));
+//	resume(create((void*)cpubound, 2048, 50, "cpubound2", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "iobound2", 0, NULL));
+//	resume(create((void*)cpubound, 2048, 50, "cpubound3", 0, NULL));
+//	resume(create((void*)iobound, 2048, 50, "iobound3", 0, NULL));
 	
 	/* Kill main */
 

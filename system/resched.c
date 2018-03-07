@@ -2,7 +2,7 @@
 
 #include <xinu.h>
 
-#define DEBUG 0
+// #define DEBUG 0
 
 struct	defer	Defer;
 
@@ -26,16 +26,12 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
-	/* Vincent Maggioli 2/13 */
-	/* Adds cpu usage to process getting swapped out */
-	
-	uint32 consumedTime = clkmilli - ptold->prctxswbeg;
-	ptold->prcputot += consumedTime;
-	
+	/* Vincent Maggioli 2/13 */	
 	/* Set new priority - check if it's nulluser() */
-	if (ptold->prpid == 1) {
+	
+	if (currpid == 0) {
 		ptold->prprio = 0;		
-	} else if ((ptold->prprio = MAXPRIO - ptold->prcputot) < 1) {
+	} else if ((ptold->prprio = MAXPRIO - getcputot(currpid)) < 1) {
 		ptold->prprio = 1;
 	}
 	
@@ -43,7 +39,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	#ifdef DEBUG
 		/* Only printing user processes */
 		if (currpid > 2) {
-			kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, consumedTime, ptold->prcputot);
+			kprintf("Process %s\nCPU session time: %d\nCPU total time: %d\n\n", ptold->prname, clkmilli-ptold->prctxswbeg, getcputot(currpid));
 		}
 	#endif
 
