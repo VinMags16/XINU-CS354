@@ -13,6 +13,7 @@ int xts_enqueue(pid32 pid, pri16 prio)
 
 	/* Insert process into ready list */
 	enqueue(pid, xts_ready[prio].queue_head);
+	xts_ready[prio].queue_tail = xts_ready[prio].queue_head;
 	xts_ready[prio].status = 1;
 	return 0;
 }

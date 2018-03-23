@@ -15,11 +15,16 @@ process	main(void)
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
 
-//	resume(create((void*)cputest, 2048, INITPRIO, "cputest", 0, NULL));
-//	resume(create((void*)iotest, 2048, INITPRIO, "iotest", 0, NULL));
-//	resume(create((void*)mixedtest, 2048, INITPRIO, "mixedtest", 0, NULL));
+	pid32 mainPid = currpid;
 
-	kill(2);	
+	resume(create((void*)cpubound, 2048, 19, "cpubound1", 0, NULL));
+	resume(create((void*)iobound, 2048, 19, "iobound1", 0, NULL));
+	resume(create((void*)cpubound, 2048, 29, "cpubound2", 0, NULL));
+	resume(create((void*)iobound, 2048, 29, "iobound2", 0, NULL));
+	resume(create((void*)cpubound, 2048, 39, "cpubound3", 0, NULL));
+	resume(create((void*)iobound, 2048, 39, "opbound3", 0, NULL));
+
+	kill(mainPid);	
 	
 	/*recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));

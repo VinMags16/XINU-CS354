@@ -9,7 +9,7 @@ void iobound()
 {
 	for (int i = 0; i < UP1; i++) {
 		for (int j = 0; j < UP2; j++) {
-			sleepms(10);
+			sleepms(50);
 //			kprintf("Pid = %d\nCount = %d\nPrcputot = %d\n\n", currpid, i, proctab[currpid].prcputot);
 		}
 	}

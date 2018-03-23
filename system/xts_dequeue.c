@@ -4,13 +4,13 @@
 
 pid32 xts_dequeue()
 {
-	for (int i = SOLTS-1; i >= 0; i--) {
-		if (xts_ready[i].status) {
-			if (firstid(xts_ready[i].queue_head) == lastid(xts_ready[i].queue_head)) {
-				xts_ready[i].status = 0;
-			}
-			return dequeue(xts_ready[i].queue_head);
+	pri16 prio = xts_priochk();
+	if (xts_ready[prio].status) {
+		pri16 element = dequeue(xts_ready[prio].queue_head);
+		if (isempty(xts_ready[prio].queue_head)) {
+			xts_ready[prio].status = 0;
 		}
+		return element;
 	}
 	return 0;
 }
