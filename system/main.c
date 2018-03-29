@@ -25,5 +25,5 @@ process	main(void)
 	resume(create((void*)test, 2048, 5, "test", 0, NULL));
 	resume(create((void*)sendmsg, 2048, 2, "sendmsg", 1, "Hello world"));
 
-	kill(2);
+//	kill(2);
 }

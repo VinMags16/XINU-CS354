@@ -23,6 +23,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	/* Point to process table entry for the current (old) process */
 
 	ptold = &proctab[currpid];
+	pid32 oldpid = currpid;
 
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		if (ptold->prprio > firstkey(readylist)) {
@@ -42,6 +43,13 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew->prstate = PR_CURR;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
+
+	if (oldpid == 2 && currpid == 3) {
+		kprintf("From main\n");
+	}
+	if (currpid == 3) {
+		kprintf("Switching to 3\n");
+	}
 
 	/* Old process returns here when resumed */
 

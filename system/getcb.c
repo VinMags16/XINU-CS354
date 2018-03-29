@@ -13,6 +13,8 @@ syscall getcb()
 		restore(mask);
 		return SYSERR;
 	}
+	int (*fnptr)() = prptr->fptr;
+	(*fnptr)();
 	restore(mask);
 	return OK;
 }
