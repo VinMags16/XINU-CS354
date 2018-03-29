@@ -1,3 +1,12 @@
+/* in file sendblk.c */
+extern	syscall	sendblk(pid32, umsg32);
+
+/* in file receivemsg.c */
+extern 	void 	receivemsg(void);
+
+/* in file sendmsg.c */
+extern	void	sendmsg(umsg32);
+
 /* in file addargs.c */
 extern	status	addargs(pid32, int32, int32[], int32,char *, void *);
 

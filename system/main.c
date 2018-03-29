@@ -15,15 +15,13 @@ process	main(void)
 	kprintf("\n(Maggioli, Vincent)\n");
 	kprintf("\nvmaggiol\n");
 	recvclr();
-	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
+	
+	/* Part 3 */
+	resume(create((void*)receivemsg, 2048, 5, "receivemsg", 0, NULL));
+	resume(create((void*)sendmsg, 2048, 2, "sendmsg1", 1, "Message 1"));
+	resume(create((void*)sendmsg, 2048, 2, "sendmsg2", 1, "Message 2"));
 
-	/* Wait for shell to exit and recreate it */
+	/* Part 4 */
 
-	while (TRUE) {
-		receive();
-		sleepms(200);
-		kprintf("\n\nMain process recreating shell\n\n");
-		resume(create(shell, 4096, 20, "shell", 1, CONSOLE));
-	}
 	return OK;
 }

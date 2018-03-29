@@ -58,6 +58,14 @@ pid32	create(
 	prptr->prdesc[1] = CONSOLE;
 	prptr->prdesc[2] = CONSOLE;
 
+	/* Vincent Maggioli */
+	/* Initialize sending fields */
+	
+	prptr->sendblkflag = 0;
+	prptr->sendblkrcp = -1;
+	prptr->rcpblkflag = 0;
+	prptr->sendqueue = newqueue();
+
 	/* Initialize stack as if the process was called		*/
 
 	*saddr = STACKMAGIC;
