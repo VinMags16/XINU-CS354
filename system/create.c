@@ -65,6 +65,7 @@ pid32	create(
 	prptr->sendblkrcp = -1;
 	prptr->rcpblkflag = 0;
 	prptr->sendqueue = newqueue();
+	prptr->prhascb = FALSE;
 
 	/* Initialize stack as if the process was called		*/
 

@@ -16,7 +16,6 @@ syscall	send(
 
 	mask = disable();
 	if (isbadpid(pid)) {
-		kprintf("Bad pid: %d\n", currpid);
 		restore(mask);
 		return SYSERR;
 	}
@@ -24,7 +23,6 @@ syscall	send(
 	prptr = &proctab[pid];
 
 	if ((prptr->prstate == PR_FREE) || prptr->prhasmsg) {
-		kprintf("Has msg: %d\n", currpid);
 		restore(mask);
 		return SYSERR;
 	}
