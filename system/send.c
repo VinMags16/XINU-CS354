@@ -16,18 +16,22 @@ syscall	send(
 
 	mask = disable();
 	if (isbadpid(pid)) {
+		kprintf("Bad pid: %d\n", currpid);
 		restore(mask);
 		return SYSERR;
 	}
 
 	prptr = &proctab[pid];
+
 	if ((prptr->prstate == PR_FREE) || prptr->prhasmsg) {
+		kprintf("Has msg: %d\n", currpid);
 		restore(mask);
 		return SYSERR;
 	}
+
 	prptr->prmsg = msg;		/* Deliver message		*/
 	prptr->prhasmsg = TRUE;		/* Indicate message is waiting	*/
-
+	
 	/* If recipient waiting or in timed-wait make it ready */
 
 	if (prptr->prstate == PR_RECV) {

@@ -17,11 +17,13 @@ process	main(void)
 	recvclr();
 	
 	/* Part 3 */
-	resume(create((void*)receivemsg, 2048, 5, "receivemsg", 0, NULL));
-	resume(create((void*)sendmsg, 2048, 2, "sendmsg1", 1, "Message 1"));
-	resume(create((void*)sendmsg, 2048, 2, "sendmsg2", 1, "Message 2"));
+//	resume(create((void*)receivemsg, 2048, 5, "receivemsg", 0, NULL));
+//	resume(create((void*)sendmsg, 2048, 2, "sendmsg1", 1, "Message 1"));
+//	resume(create((void*)sendmsg, 2048, 2, "sendmsg2", 1, "Message 2"));
 
 	/* Part 4 */
+	resume(create((void*)test, 2048, 5, "test", 0, NULL));
+	resume(create((void*)sendmsg, 2048, 2, "sendmsg", 1, "Hello world"));
 
-	return OK;
+	kill(2);
 }

@@ -5,7 +5,9 @@
 
 void sendmsg(umsg32 msg)
 {
-	sendblk(3, msg);
+	if (send(3, msg) == SYSERR) {
+		kprintf("Error sending message!\n");
+	}
 	#ifdef DEBUG
 		kprintf("Message sent\n");
 	#endif

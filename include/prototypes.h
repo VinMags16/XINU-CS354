@@ -1,3 +1,18 @@
+/* in file getcb.c */
+extern	syscall	getcb(void);
+
+/* in file cbhandler.c */
+extern	void	cbhandler(void);
+
+/* in file test.c */
+extern	void	test(void);
+
+/* in file mrecv_cb.c */
+extern	int32	mrecv_cb(void);
+
+/* in file cbreg.c */
+extern	syscall	cbreg(int(*)());
+
 /* in file sendblk.c */
 extern	syscall	sendblk(pid32, umsg32);
 

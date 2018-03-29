@@ -59,6 +59,8 @@ struct procent {		/* Entry in the process table		*/
 	pid32	sendblkrcp;
 	bool8	rcpblkflag;
 	qid16	sendqueue;
+	bool8 	prhascb;
+	int	(*fptr)();
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/
