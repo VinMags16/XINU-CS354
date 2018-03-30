@@ -10,6 +10,7 @@ syscall getcb()
 	mask = disable();
 	prptr = &proctab[currpid];
 	if (!prptr->prhasmsg || !prptr->prhascb) {
+		
 		restore(mask);
 		return SYSERR;
 	}

@@ -13,7 +13,7 @@ process	main(void)
 	kprintf("\nYou can do something else, or do nothing; it's completely up to you.\n");
 	kprintf("\n...creating a shell\n");
 	kprintf("\n(Maggioli, Vincent)\n");
-	kprintf("\nvmaggiol\n");
+	kprintf("\nvmaggiol\n\n");
 	recvclr();
 	
 	/* Part 3 */
@@ -22,8 +22,7 @@ process	main(void)
 //	resume(create((void*)sendmsg, 2048, 2, "sendmsg2", 1, "Message 2"));
 
 	/* Part 4 */
-	resume(create((void*)test, 2048, 5, "test", 0, NULL));
-	resume(create((void*)sendmsg, 2048, 2, "sendmsg", 1, "Hello world"));
+	resume(create((void*)test, 2048, 30, "test", 0, NULL));
 
 //	kill(2);
 }

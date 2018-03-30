@@ -1,3 +1,6 @@
+/* in file testproc.c */
+extern	void	testproc(void);
+
 /* in file getcb.c */
 extern	syscall	getcb(void);
 

@@ -5,7 +5,7 @@
 
 void sendmsg(umsg32 msg)
 {
-	send(3, msg);
+	sendblk(3, msg);
 	#ifdef DEBUG
 		kprintf("Message sent\n");
 	#endif
