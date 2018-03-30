@@ -1,3 +1,6 @@
+/* in file sender.c */
+extern	void	sender(void);
+
 /* in file hascb.c */
 extern	syscall	hascb(void);
 

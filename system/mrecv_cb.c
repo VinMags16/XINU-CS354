@@ -4,6 +4,6 @@
 
 int32 mrecv_cb()
 {
-	kprintf("%d:%d\n", receive(), getpid());
+	kprintf("%s\n", receive());
 	return OK;
 }
