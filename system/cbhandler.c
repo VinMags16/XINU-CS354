@@ -4,8 +4,5 @@
 
 void cbhandler()
 {
-	if (currpid > 3) {
-		kprintf("cbhandler %d\n", currpid);
-	}
 	getcb();
 }

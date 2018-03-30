@@ -43,7 +43,9 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
-	getcb();
+//	if (currpid > 3) {
+//		kprintf("currpid = %d\n", currpid);
+//	}
 
 	/* Old process returns here when resumed */
 
