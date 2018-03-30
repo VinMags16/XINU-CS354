@@ -1,19 +1,16 @@
-/* getcb.c - getcb */
-
 #include <xinu.h>
 
-syscall getcb()
+syscall hascb()
 {
 	intmask mask;
 	struct procent *prptr;
 
 	mask = disable();
 	prptr = &proctab[currpid];
-	if (!prptr->prhasmsg || !prptr->prhascb) {
+	if (!prptr->prhascb || !prptr->prhasmsg) {
 		restore(mask);
 		return SYSERR;
 	}
-	int (*fnptr)() = prptr->fptr;
 	restore(mask);
-	return fnptr;
+	return OK;
 }

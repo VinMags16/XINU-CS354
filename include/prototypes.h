@@ -1,3 +1,6 @@
+/* in file hascb.c */
+extern	syscall	hascb(void);
+
 /* in file testproc.c */
 extern	void	testproc(void);
 

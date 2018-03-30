@@ -14,7 +14,7 @@ syscall cbreg(int(*fnp)())
 		return SYSERR;
 	}
 	prptr->fptr = fnp;
-	prptr->prhascb = 1;
+	prptr->prhascb = TRUE;
 	restore(mask);
 	return OK;
 }

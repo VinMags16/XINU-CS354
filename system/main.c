@@ -22,7 +22,7 @@ process	main(void)
 //	resume(create((void*)sendmsg, 2048, 2, "sendmsg2", 1, "Message 2"));
 
 	/* Part 4 */
-	resume(create((void*)test, 2048, 30, "test", 0, NULL));
+	resume(create((void*)test, 2048, 18, "test", 0, NULL));
 
 //	kill(2);
 }
