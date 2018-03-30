@@ -1,0 +1,14 @@
+.TH RECEIVE
+.SH NAME
+    receive \- receive a message sent to the current process
+.SH SYNOPSIS
+.B #include<xinu.h>
+
+.B int receive
+(void);
+.SH DESCRIPTION
+    The 
+.B receive()
+system call is used to grab a message sent to the current process should there be one.  This system call will block the current process if there is no message until a message is sent.
+.SH RETURN VALUE
+   Once a message is received it is returned as type umsg32. 
