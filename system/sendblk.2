@@ -1,8 +1,14 @@
-.TH RECEIVE
+.TH SENDBLK
 .SH NAME
-	
+    sendblk - Sends a message to a process, blocks and waits otherwise
 .SH SYNOPSIS
-
+.B #include<xinu.h>
+.B syscall sendblk(pid32
+\fIpid
+.B , umsg32
+\fImsg
+.B ); 
 .SH DESCRIPTION
-
+    For sending a message, sendblk uses essentially the same functionality.  If the process receiving the message does not currently have a message, then the message is sent.  However, instead of returning an error if the receiving process has a message, sendblk adds the sending process into the receiving process' send queue.  Then, the receiving will need to call receive() for each message in its send queue if the program needs every message.
 .SH OPTIONS
+	The only return value is OK (1) or SYSERR -1)
