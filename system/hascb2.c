@@ -1,20 +1,16 @@
-/* cbreg.c - cbreg */
-
 #include <xinu.h>
 
-syscall cbreg(int(*fnp)())
+syscall hascb2()
 {
 	intmask mask;
 	struct procent *prptr;
-	
+
 	mask = disable();
 	prptr = &proctab[currpid];
-	if (prptr->prhascb) {
+	if (!prptr->prhascb2) {
 		restore(mask);
 		return SYSERR;
 	}
-	prptr->fptr = fnp;
-	prptr->prhascb = TRUE;
 	restore(mask);
 	return OK;
 }

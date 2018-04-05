@@ -66,6 +66,11 @@ pid32	create(
 	prptr->rcpblkflag = 0;
 	prptr->sendqueue = newqueue();
 	prptr->prhascb = FALSE;
+	prptr->prhascb1 = FALSE;
+	prptr->prhascb2 = FALSE;
+	prptr->sigqueue[0].ssig = NULL;
+	prptr->sigqueue[1].ssig = NULL;
+	prptr->sigqueue[2].ssig = NULL;
 
 	/* Initialize stack as if the process was called		*/
 

@@ -39,6 +39,13 @@
 
 #define NDESC		5	/* must be odd to make procent 4N bytes	*/
 
+/* Definition of signal queue item */
+
+struct sigent {
+	uint16	ssig;		/* Type of signal			*/
+	uint32	tmarg;		/* Argument for XSIGXTM			*/
+};
+
 /* Definition of the process table (multiple of 32 bits) */
 
 struct procent {		/* Entry in the process table		*/
@@ -61,6 +68,11 @@ struct procent {		/* Entry in the process table		*/
 	qid16	sendqueue;
 	bool8 	prhascb;
 	int	(*fptr)();
+	bool8	prhascb1;	/* XSIGCHL */
+	int 	(*fptr1)();	
+	bool8	prhascb2;	/* XSIGXTM */
+	int	(*fptr2)();
+	struct sigent sigqueue[3];	/* XSIGRCV = 0, XSIGCHLD = 1, XSIGXTM = 2 */	
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

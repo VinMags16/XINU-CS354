@@ -1,14 +1,29 @@
+/* in file handlsigs.c */
+extern	syscall	handlsigs(void);
+
 /* in file sender.c */
 extern	void	sender(void);
 
 /* in file hascb.c */
 extern	syscall	hascb(void);
 
+/* in file hascb1.c */
+extern	syscall	hascb1(void);
+
+/* in file hascb2.c */
+extern	syscall	hascb2(void);
+
 /* in file testproc.c */
 extern	void	testproc(void);
 
 /* in file getcb.c */
 extern	syscall	getcb(void);
+
+/* in file getcb1.c */
+extern 	syscall	getcb1(void);
+
+/* in file getcb2.c */
+extern	syscall	getcb2(void);
 
 /* in file cbhandler.c */
 extern	void	cbhandler(void);
@@ -19,8 +34,8 @@ extern	void	test(void);
 /* in file mrecv_cb.c */
 extern	int32	mrecv_cb(void);
 
-/* in file cbreg.c */
-extern	syscall	cbreg(int(*)());
+/* in file sigcbreg.c */
+extern	syscall	sigcbreg(uint16, int(*)(), uint32);
 
 /* in file sendblk.c */
 extern	syscall	sendblk(pid32, umsg32);

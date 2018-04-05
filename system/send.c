@@ -29,6 +29,8 @@ syscall	send(
 
 	prptr->prmsg = msg;		/* Deliver message		*/
 	prptr->prhasmsg = TRUE;		/* Indicate message is waiting	*/
+	prptr->sigqueue[0].ssig = XSIGRCV;
+	prptr->sigqueue[0].tmarg = NULL;
 	
 	/* If recipient waiting or in timed-wait make it ready */
 

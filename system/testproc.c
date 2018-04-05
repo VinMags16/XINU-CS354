@@ -1,9 +1,9 @@
-#include <xinu.h>
 //#define DEBUG 0
+#include <xinu.h>
 
 void testproc()
 {
-	if (cbreg(&mrecv_cb) != OK) {
+	if (sigcbreg(XSIGRCV, &mrecv_cb, NULL) != OK) {
 		kprintf("Callback registration failed!\n");
 		return;
 	}
