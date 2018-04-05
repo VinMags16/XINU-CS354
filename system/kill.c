@@ -25,8 +25,10 @@ syscall	kill(
 		xdone();
 	}
 
-	prptr->sendqueue[1].ssig = XSIGCHL;
-	prptr->sendqueue[1].tmarg = NULL;
+	struct procent *parent = &proctab[prptr->prparent];
+	struct sigent *ent = &parent->sigqueue[1];
+	ent->ssig = XSIGCHL;
+	ent->tmarg = NULL;
 	send(prptr->prparent, pid);
 	for (i=0; i<3; i++) {
 		close(prptr->prdesc[i]);

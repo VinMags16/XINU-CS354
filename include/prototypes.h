@@ -1,3 +1,18 @@
+/* in file sigcbunreg.c */
+extern	syscall	sigcbunreg(uint16);
+
+/* in file recvcb.c */
+extern	int	recvcb(void);
+
+/* in file parent.c */
+extern	void	parent(void);
+
+/* in file childcb.c */
+extern	int	childcb(void);
+
+/* in file child.c */
+extern	void	child(void);
+
 /* in file handlsigs.c */
 extern	syscall	handlsigs(void);
 

@@ -17,12 +17,9 @@ process	main(void)
 	recvclr();
 	
 	/* Part 3 */
-//	resume(create((void*)receivemsg, 2048, 5, "receivemsg", 0, NULL));
-//	resume(create((void*)sendmsg, 2048, 2, "sendmsg1", 1, "Message 1"));
-//	resume(create((void*)sendmsg, 2048, 2, "sendmsg2", 1, "Message 2"));
-
+	resume(create((void*)parent, 2048, 5, "parent", 0, NULL));
+	send(3, "Message\n");
 	/* Part 4 */
-//	resume(create((void*)test, 2048, 18, "test", 0, NULL));
 
-//	kill(2);
+	kill(2);
 }
