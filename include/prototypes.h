@@ -1,3 +1,6 @@
+/* in file xtmcb.c */
+extern	void	xtmcb(void);
+
 /* in file sigcbunreg.c */
 extern	syscall	sigcbunreg(uint16);
 

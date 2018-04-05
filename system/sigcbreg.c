@@ -18,6 +18,7 @@ syscall sigcbreg(uint16 ssig, int(*fnp)(), uint32 tmarg)
 	} else if (ssig == XSIGXTM) {
 		prptr->fptr2 = fnp;
 		prptr->prhascb2 = TRUE;
+		prptr-> prwalltime = prptr->prstarttime + tmarg;
 	} else {
 		restore(mask);
 		return SYSERR;

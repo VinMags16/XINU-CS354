@@ -17,6 +17,7 @@
 #define	PR_WAIT		6	/* Process is on semaphore queue	*/
 #define	PR_RECTIM	7	/* Process is receiving with timeout	*/
 #define PR_SNDBLK	20
+#define PR_CHLDWAIT	21
 
 /* Miscellaneous process definitions */
 
@@ -43,7 +44,6 @@
 
 struct sigent {
 	uint16	ssig;		/* Type of signal			*/
-	uint32	tmarg;		/* Argument for XSIGXTM			*/
 };
 
 /* Definition of the process table (multiple of 32 bits) */
@@ -73,6 +73,8 @@ struct procent {		/* Entry in the process table		*/
 	bool8	prhascb2;	/* XSIGXTM */
 	int	(*fptr2)();
 	struct sigent sigqueue[3];	/* XSIGRCV = 0, XSIGCHLD = 1, XSIGXTM = 2 */	
+	uint32	prstarttime;
+	uint32	prwalltime;
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

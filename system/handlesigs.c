@@ -7,23 +7,32 @@ syscall	handlesigs()
 
 	mask = disable();
 	prptr = &proctab[currpid];
-	if (prptr->sigqueue[0].ssig == XSIGRCV && prptr->prhascb) {
-		int(*fnptr)() = prptr->fptr;
-		(*fnptr)();
-		prptr->sigqueue[0].ssig = NULL;
-		prptr->prhascb = FALSE;
-	}
-	if (prptr->sigqueue[1].ssig == XSIGCHL && prptr->prhascb1) {
-		int(*fnptr)() = prptr->fptr1;
-		(*fnptr)();
-		prptr->sigqueue[1].ssig = NULL;
-		prptr->prhascb1 = FALSE;
-	}
-	if (prptr->sigqueue[2].ssig == XSIGXTM  && prptr->prhascb2) {		
-		int(*fnptr)() = prptr->fptr2;
-		(*fnptr)();
-		prptr->sigqueue[2].ssig = NULL;
-		prptr->prhascb2 = FALSE;
+	for (int i = 0; i < 3; i++) {
+		struct sigent *ent = &prptr->sigqueue[i];
+		if (ent->ssig != NULL) {
+			switch(ent->ssig) {
+				case XSIGRCV:
+					if (prptr->prhascb) {
+						int(*fnptr)() = prptr->fptr;
+						(*fnptr)();
+					}
+					break;
+				case XSIGCHL:
+					if (prptr->prhascb1) {
+						int(*fnptr)() = prptr->fptr1;
+						(*fnptr)();
+					}
+					break;
+				case XSIGXTM:
+					if (prptr->prhascb2) {
+						int(*fnptr)() = prptr->fptr2;
+						(*fnptr)();	
+					}
+					break;
+			}
+		} else {
+			break;
+		}
 	}
 	restore(mask);
 	return OK;

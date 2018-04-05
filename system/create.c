@@ -71,6 +71,7 @@ pid32	create(
 	prptr->sigqueue[0].ssig = NULL;
 	prptr->sigqueue[1].ssig = NULL;
 	prptr->sigqueue[2].ssig = NULL;
+	prptr->prstarttime = clktime;
 
 	/* Initialize stack as if the process was called		*/
 
