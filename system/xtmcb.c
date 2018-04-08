@@ -1,6 +1,7 @@
 #include <xinu.h>
 
-void xtmcb()
+int xtmcb()
 {
-	kprintf("Over time limit!\n");
+	kprintf("System time out\n");
+	return OK;
 }

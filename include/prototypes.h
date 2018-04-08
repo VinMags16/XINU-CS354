@@ -1,5 +1,8 @@
+/* in file childwait.c */
+extern	syscall	childwait(void);
+
 /* in file xtmcb.c */
-extern	void	xtmcb(void);
+extern	int	xtmcb(void);
 
 /* in file sigcbunreg.c */
 extern	syscall	sigcbunreg(uint16);
@@ -16,8 +19,8 @@ extern	int	childcb(void);
 /* in file child.c */
 extern	void	child(void);
 
-/* in file handlsigs.c */
-extern	syscall	handlsigs(void);
+/* in file handlesigs.c */
+extern	syscall	handlesigs(void);
 
 /* in file sender.c */
 extern	void	sender(void);

@@ -43,9 +43,14 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
-//	if (currpid > 3) {
-//		kprintf("currpid = %d\n", currpid);
-//	}
+	if (clktime > proctab[currpid].prwalltime) {
+		for (int i = 0; i < 3; i++) {
+			if (proctab[currpid].sigqueue[i].ssig == 0) {
+				proctab[currpid].sigqueue[i].ssig = XSIGXTM;
+				break;
+			}
+		}
+	}
 
 	/* Old process returns here when resumed */
 

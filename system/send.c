@@ -29,7 +29,11 @@ syscall	send(
 
 	prptr->prmsg = msg;		/* Deliver message		*/
 	prptr->prhasmsg = TRUE;		/* Indicate message is waiting	*/
-	prptr->sigqueue[0].ssig = XSIGRCV;
+	for (int i = 0; i < 3; i++) {
+		if (prptr->sigqueue[i].ssig == 0) {
+			prptr->sigqueue[i].ssig = XSIGRCV;
+		}
+	}
 	
 	/* If recipient waiting or in timed-wait make it ready */
 

@@ -18,8 +18,10 @@ process	main(void)
 	
 	/* Part 3 */
 	resume(create((void*)parent, 2048, 5, "parent", 0, NULL));
-	send(3, "Message\n");
+//	send(3, "Message\n");
+	
 	/* Part 4 */
+
 
 	kill(2);
 }

@@ -14,8 +14,15 @@ void parent()
 		kprintf("Callback regsitration failed!\n");
 		return;
 	}
-	resume(create((void*)child, 2048, 10, "child", 0, NULL));
-	childwait();
-	sleepms(2000);
-	for (int i = 0; i < 10; i++);
+
+	/* Test recv */
+	// Main sends message in order to avoid having child process 
+//	sleepms(1000);
+
+	/* Test chld */
+//	resume(create((void*)child, 2048, 10, "child", 0, NULL));
+//	childwait();
+
+	/* Test xtm */
+//	sleepms(2000);
 }

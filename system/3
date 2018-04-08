@@ -25,9 +25,9 @@ syscall	kill(
 		xdone();
 	}
 
-//	if (currpid == 4) {
-//		kprintf("Killing a child D:\n");
-//	}
+	if (currpid == 4) {
+		kprintf("Killing a child D:\n");
+	}
 
 	struct procent *parent = &proctab[prptr->prparent];
 	struct sigent *ent = &parent->sigqueue[1];

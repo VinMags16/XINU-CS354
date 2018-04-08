@@ -68,10 +68,10 @@ pid32	create(
 	prptr->prhascb = FALSE;
 	prptr->prhascb1 = FALSE;
 	prptr->prhascb2 = FALSE;
-	prptr->sigqueue[0].ssig = NULL;
-	prptr->sigqueue[1].ssig = NULL;
-	prptr->sigqueue[2].ssig = NULL;
 	prptr->prstarttime = clktime;
+	prptr->prwalltime = 0;
+	prptr->numChildren = 0;
+	proctab[currpid].numChildren++;
 
 	/* Initialize stack as if the process was called		*/
 

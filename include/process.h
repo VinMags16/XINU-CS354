@@ -75,6 +75,7 @@ struct procent {		/* Entry in the process table		*/
 	struct sigent sigqueue[3];	/* XSIGRCV = 0, XSIGCHLD = 1, XSIGXTM = 2 */	
 	uint32	prstarttime;
 	uint32	prwalltime;
+	uint32	numChildren;
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

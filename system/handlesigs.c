@@ -30,6 +30,7 @@ syscall	handlesigs()
 					}
 					break;
 			}
+			proctab[currpid].sigqueue[i].ssig = 0;
 		} else {
 			break;
 		}

@@ -17,10 +17,7 @@ void	clkhandler()
 		/* One second has passed, so increment seconds count */
 
 		clktime++;
-		if (proctab[currpid].prhascb2 && clktime > proctab[currpid].prwalltime) {
-			proctab[currpid].sigqueue[2].ssig = XSIGXTM;			
-		}
-
+		
 		/* Reset the local ms counter for the next second */
 
 		count1000 = 1000;
