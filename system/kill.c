@@ -25,14 +25,16 @@ syscall	kill(
 		xdone();
 	}
 
-//	if (currpid == 4) {
-//		kprintf("Killing a child D:\n");
-//	}
-
 	struct procent *parent = &proctab[prptr->prparent];
-	struct sigent *ent = &parent->sigqueue[1];
-	ent->ssig = XSIGCHL;
+	for (int i = 0; i < 3; i++) {
+		if (parent->sigqueue[i] == 0) {
+			parent->sigqueue[i] = XSIGCHL;
+		}
+	}
 	parent->numChildren--;
+	if (parent->deadchild == -1) {
+		parent->deadchild = pid;
+	}
 	send(prptr->prparent, pid);
 	for (i=0; i<3; i++) {
 		close(prptr->prdesc[i]);

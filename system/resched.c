@@ -45,8 +45,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	if (clktime > proctab[currpid].prwalltime) {
 		for (int i = 0; i < 3; i++) {
-			if (proctab[currpid].sigqueue[i].ssig == 0) {
-				proctab[currpid].sigqueue[i].ssig = XSIGXTM;
+			if (proctab[currpid].sigqueue[i] == 0) {
+				proctab[currpid].sigqueue[i] = XSIGXTM;
 				break;
 			}
 		}

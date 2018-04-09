@@ -1,3 +1,11 @@
+/* in file getsigqueue.c */
+extern	syscall	getsigqueue(void);
+
+/* in file getcb.c */
+extern	syscall	getcbrcv(void);
+extern	syscall	getcbchl(void);
+extern	syscall	getcbxtm(void);
+
 /* in file childwait.c */
 extern	syscall	childwait(void);
 
@@ -19,41 +27,11 @@ extern	int	childcb(void);
 /* in file child.c */
 extern	void	child(void);
 
-/* in file handlesigs.c */
-extern	syscall	handlesigs(void);
-
 /* in file sender.c */
 extern	void	sender(void);
 
-/* in file hascb.c */
-extern	syscall	hascb(void);
-
-/* in file hascb1.c */
-extern	syscall	hascb1(void);
-
-/* in file hascb2.c */
-extern	syscall	hascb2(void);
-
-/* in file testproc.c */
-extern	void	testproc(void);
-
-/* in file getcb.c */
-extern	syscall	getcb(void);
-
-/* in file getcb1.c */
-extern 	syscall	getcb1(void);
-
-/* in file getcb2.c */
-extern	syscall	getcb2(void);
-
 /* in file cbhandler.c */
 extern	void	cbhandler(void);
-
-/* in file test.c */
-extern	void	test(void);
-
-/* in file mrecv_cb.c */
-extern	int32	mrecv_cb(void);
 
 /* in file sigcbreg.c */
 extern	syscall	sigcbreg(uint16, int(*)(), uint32);

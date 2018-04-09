@@ -30,8 +30,8 @@ syscall	send(
 	prptr->prmsg = msg;		/* Deliver message		*/
 	prptr->prhasmsg = TRUE;		/* Indicate message is waiting	*/
 	for (int i = 0; i < 3; i++) {
-		if (prptr->sigqueue[i].ssig == 0) {
-			prptr->sigqueue[i].ssig = XSIGRCV;
+		if (prptr->sigqueue[i] == 0) {
+			prptr->sigqueue[i] = XSIGRCV;
 		}
 	}
 	
