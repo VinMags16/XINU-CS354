@@ -32,8 +32,5 @@ void cbhandler()
 			default:
 				break;
 		};
-		if (sigqueue[i] == 0) {
-			return;
-		}
 	}
 }

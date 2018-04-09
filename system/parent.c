@@ -21,8 +21,8 @@ void parent()
 
 	/* Test chld */
 //	resume(create((void*)child, 2048, 10, "child", 0, NULL));
-//	childwait();
+//	kprintf("My child, %d, died D:\n", childwait());
 
 	/* Test xtm */
-//	sleepms(2000);
+	sleepms(2000);
 }
