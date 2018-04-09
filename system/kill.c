@@ -25,15 +25,14 @@ syscall	kill(
 		xdone();
 	}
 
-	struct procent *parent = &proctab[prptr->prparent];
 	for (int i = 0; i < 3; i++) {
-		if (parent->sigqueue[i] == 0) {
-			parent->sigqueue[i] = XSIGCHL;
+		if (proctab[prptr->prparent].sigqueue[i] == 0) {
+			proctab[prptr->prparent].sigqueue[i] = XSIGCHL;
 		}
 	}
-	parent->numChildren--;
-	if (parent->deadchild == -1) {
-		parent->deadchild = pid;
+	proctab[prptr->prparent].numChildren--;
+	if (proctab[prptr->prparent].deadchild == -1) {
+		proctab[prptr->prparent].deadchild = pid;
 	}
 	send(prptr->prparent, pid);
 	for (i=0; i<3; i++) {

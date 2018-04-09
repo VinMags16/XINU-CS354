@@ -2,6 +2,6 @@
 
 int childcb()
 {
-	kprintf("My child died D:\n");
+	kprintf("My child died D: %d\n", currpid);
 	return OK;
 }

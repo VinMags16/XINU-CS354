@@ -11,6 +11,7 @@ syscall	childwait()
 	proctab[currpid].prstate = PR_CHLDWAIT;
 	resched();
 	pid32 pid = proctab[currpid].deadchild;
+	kprintf("%d\n", currpid);
 	restore(mask);
 	cbhandler();
 	return pid;

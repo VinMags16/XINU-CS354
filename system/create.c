@@ -72,6 +72,7 @@ pid32	create(
 	prptr->prwalltime = 0;
 	prptr->numChildren = 0;
 	proctab[currpid].numChildren++;
+	prptr->deadchild = -1;
 
 	/* Initialize stack as if the process was called		*/
 
