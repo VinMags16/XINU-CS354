@@ -34,6 +34,9 @@ syscall	kill(
 	if (proctab[prptr->prparent].deadchild == -1) {
 		proctab[prptr->prparent].deadchild = pid;
 	}
+	if (proctab[prptr->prparent].prstate == PR_CHLDWAIT) {
+		ready(prptr->prparent);
+	}
 	send(prptr->prparent, pid);
 	for (i=0; i<3; i++) {
 		close(prptr->prdesc[i]);

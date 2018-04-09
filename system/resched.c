@@ -43,10 +43,6 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
-	if (currpid == 3) {
-		kprintf("Switchin in 3\n");
-	}
-
 	if (clktime > proctab[currpid].prwalltime) {
 		for (int i = 0; i < 3; i++) {
 			if (proctab[currpid].sigqueue[i] == 0) {

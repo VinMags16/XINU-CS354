@@ -20,9 +20,8 @@ void parent()
 //	sleepms(1000);
 
 	/* Test chld */
-	resume(create((void*)child, 2048, 10, "child", 0, NULL));
+	resume(create((void*)child, 2048, 3, "child", 0, NULL));
 	kprintf("My child, %d, died D:\n", childwait());
-
 	/* Test xtm */
 //	sleepms(2000);
 }
