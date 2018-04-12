@@ -48,6 +48,8 @@ syscall	freemem(
 
 	memlist.mlength += nbytes;
 
+	removemem(blkaddr);
+
 	/* Either coalesce with previous block or add to free list */
 
 	if (top == (uint32) block) { 	/* Coalesce with previous block	*/

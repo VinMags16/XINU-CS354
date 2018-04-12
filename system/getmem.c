@@ -28,6 +28,7 @@ char  	*getmem(
 		if (curr->mlength == nbytes) {	/* Block is exact match	*/
 			prev->mnext = curr->mnext;
 			memlist.mlength -= nbytes;
+			addmem((char*)(curr));
 			restore(mask);
 			return (char *)(curr);
 
@@ -38,6 +39,7 @@ char  	*getmem(
 			leftover->mnext = curr->mnext;
 			leftover->mlength = curr->mlength - nbytes;
 			memlist.mlength -= nbytes;
+			addmem((char*)(curr));
 			restore(mask);
 			return (char *)(curr);
 		} else {			/* Move to next block	*/

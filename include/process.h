@@ -71,6 +71,7 @@ struct procent {		/* Entry in the process table		*/
 	uint32	prwalltime;
 	uint32	numChildren;
 	pid32	deadchild;
+	char*	prmemlist[100];
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

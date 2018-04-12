@@ -1,3 +1,15 @@
+/* in file memclear.c */
+extern	void	memclear(void);
+
+/* in file removemem.c */
+extern int	removemem(char*);
+
+/* in file addmem.c */
+extern	void	addmem(char*);
+
+/* in file testmem.c */
+extern	void	testmem(void);
+
 /* in file getsigqueue.c */
 extern	syscall	getsigqueue(void);
 
