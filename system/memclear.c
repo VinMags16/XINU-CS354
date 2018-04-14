@@ -3,11 +3,17 @@
 void memclear()
 {
 	struct procent *prptr;
+	struct memblk *curr;
+	struct memblk *node;
 
 	prptr = &proctab[currpid];
-	for (int i = 0; i < 100; i++) {
-		if (strcmp(prptr->prmemlist[i], NULL) != 0) {
-			freemem(prptr->prmemlist[i], 16);
-		}
+	curr = prptr->prmemlist.mnext;
+	if (curr == NULL) {
+		return;
+	}
+	while (curr != NULL) {
+		node = curr;
+		curr = curr->mnext;
+		freemem((char*)node, node->mlength);
 	}
 }

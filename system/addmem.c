@@ -1,14 +1,24 @@
 #include <xinu.h>
 
-void addmem(char* mem)
+
+void addmem(struct memblk *mem)
 {
 	struct procent *prptr;
+	struct memblk *curr;
 
 	prptr = &proctab[currpid];
-	for (int i = 0; i < 100; i++) {
-		if (strcmp(prptr->prmemlist[i], NULL) == 0) {
-			prptr->prmemlist[i] = mem;
-			break;
-		}
+	curr = prptr->prmemlist.mnext;
+	if (curr == NULL) {
+		prptr->prmemlist.mnext = mem;
+		mem->mnext = NULL;
+		prptr->prmemlist.mlength += mem->mlength;
+		return;
 	}
+	while (curr->mnext != NULL && curr->mnext != (void*)0xffffffff) {
+		kprintf("0x%x\n", curr->mnext);
+		curr = curr->mnext;
+	}
+	curr->mnext = mem;
+	mem->mnext = NULL;
+	prptr->prmemlist.mlength += mem->mlength;
 }

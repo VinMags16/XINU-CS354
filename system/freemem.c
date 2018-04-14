@@ -47,8 +47,7 @@ syscall	freemem(
 	}
 
 	memlist.mlength += nbytes;
-
-	removemem(blkaddr);
+	removemem((struct memblk *) blkaddr, nbytes);
 
 	/* Either coalesce with previous block or add to free list */
 

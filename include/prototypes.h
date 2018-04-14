@@ -2,10 +2,10 @@
 extern	void	memclear(void);
 
 /* in file removemem.c */
-extern int	removemem(char*);
+extern int	removemem(struct memblk*, uint32);
 
 /* in file addmem.c */
-extern	void	addmem(char*);
+extern	void	addmem(struct memblk*);
 
 /* in file testmem.c */
 extern	void	testmem(void);

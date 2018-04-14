@@ -73,6 +73,8 @@ pid32	create(
 	prptr->numChildren = 0;
 	proctab[currpid].numChildren++;
 	prptr->deadchild = -1;
+	prptr->prmemlist.mlength = 0;
+	prptr->prmemlist.mnext = NULL;
 
 	/* Initialize stack as if the process was called		*/
 
