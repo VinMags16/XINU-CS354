@@ -21,7 +21,7 @@ void cbhandler()
 				fnptr = getcbchl();
 				if (fnptr != SYSERR) {
 					(*fnptr)();
-				} 
+				}
 				break;
 			case XSIGXTM:
 				fnptr = getcbxtm();
@@ -32,5 +32,6 @@ void cbhandler()
 			default:
 				break;
 		};
+		sigqueue[i] = 0;
 	}
 }

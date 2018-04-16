@@ -17,11 +17,11 @@ process	main(void)
 	recvclr();
 	
 	/* Part 3 */
-//	resume(create((void*)parent, 2048, 5, "parent", 0, NULL));
+	resume(create((void*)parent, 2048, 5, "parent", 0, NULL));
 //	send(3, "Message\n");
 	
 	/* Part 4 */
-	resume(create((void*)testmem, 2048, 5, "testmem", 0, NULL));
+//	resume(create((void*)testmem, 2048, 5, "testmem", 0, NULL));
 
 	kill(2);
 }
