@@ -31,7 +31,6 @@ syscall getcbchl()
 
 	mask = disable();
 	prptr = &proctab[currpid];
-	kprintf("%d\n", currpid);
 	if (!prptr->prhascb1) {
 		restore(mask);
 		return SYSERR;

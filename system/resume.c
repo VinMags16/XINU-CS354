@@ -27,5 +27,6 @@ pri16	resume(
 	prio = prptr->prprio;		/* Record priority to return	*/
 	ready(pid);
 	restore(mask);
+	cbhandler();
 	return prio;
 }

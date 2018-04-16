@@ -40,18 +40,15 @@ syscall	kill(
 	if (parent->deadchild == -1) {
 		parent->deadchild = pid;
 	}
-	send(prptr->prparent, pid);
 	for (i=0; i<3; i++) {
 		close(prptr->prdesc[i]);
 	}
 	memclear();
 	freestk(prptr->prstkbase, prptr->prstklen);
-
 	switch (prptr->prstate) {
 	case PR_CURR:
 		prptr->prstate = PR_FREE;	/* Suicide */
 		resched();
-
 	case PR_SLEEP:
 	case PR_RECTIM:
 		unsleep(pid);
@@ -69,7 +66,7 @@ syscall	kill(
 	default:
 		prptr->prstate = PR_FREE;
 	}
-
 	restore(mask);
+	cbhandler();
 	return OK;
 }
