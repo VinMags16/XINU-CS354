@@ -14,12 +14,6 @@ syscall getcbrcv()
 		return SYSERR;
 	}
 	int (*fnptr)() = prptr->fptr;
-	for (int i = 0; i < 3; i++) {
-		if (prptr->sigqueue[i] == XSIGRCV) {
-			prptr->sigqueue[i] = 0;
-			break;
-		}
-	}
 	restore(mask);
 	return fnptr;
 }
@@ -36,12 +30,6 @@ syscall getcbchl()
 		return SYSERR;
 	}
 	int (*fnptr)() = prptr->fptr1;
-	for (int i = 0; i < 3; i++) {
-		if (prptr->sigqueue[i] == XSIGCHL) {
-			prptr->sigqueue[i] = 0;
-			break;
-		}
-	}
 	restore(mask);
 	return fnptr;
 }
@@ -58,12 +46,6 @@ syscall getcbxtm()
 		return SYSERR;
 	}
 	int (*fnptr)() = prptr->fptr2;
-	for (int i = 0; i < 3; i++) {
-		if (prptr->sigqueue[i] == XSIGXTM) {
-			prptr->sigqueue[i] = 0;
-			break;
-		}
-	}
 	restore(mask);
 	return fnptr;	
 }

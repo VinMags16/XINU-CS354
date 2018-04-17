@@ -15,19 +15,22 @@ void cbhandler()
 				fnptr = getcbrcv();
 				if (fnptr != SYSERR) {
 					(*fnptr)();
-				} 
+				}
+				clearsigrcv();
 				break;
 			case XSIGCHL:
 				fnptr = getcbchl();
 				if (fnptr != SYSERR) {
 					(*fnptr)();
 				}
+				clearsigchl();
 				break;
 			case XSIGXTM:
 				fnptr = getcbxtm();
 				if (fnptr != SYSERR) {
 					(*fnptr)();
-				} 
+				}
+				clearsigxtm();
 				break;
 			default:
 				break;

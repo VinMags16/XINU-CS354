@@ -34,9 +34,6 @@ syscall	kill(
 		}
 	}
 	parent->numChildren--;
-	if (parent->prstate == PR_CHLDWAIT) {
-		parent->prstate = PR_READY;
-	}
 	if (parent->deadchild == -1) {
 		parent->deadchild = pid;
 	}
@@ -48,6 +45,9 @@ syscall	kill(
 	switch (prptr->prstate) {
 	case PR_CURR:
 		prptr->prstate = PR_FREE;	/* Suicide */
+		if (parent->prstate == PR_CHLDWAIT) {
+			ready(prptr->prparent);
+		}
 		resched();
 	case PR_SLEEP:
 	case PR_RECTIM:

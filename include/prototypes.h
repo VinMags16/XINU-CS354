@@ -1,3 +1,8 @@
+/* in file clearsig.c */
+extern	syscall	clearsigrcv(void);
+extern	syscall	clearsigchl(void);
+extern	syscall	clearsigxtm(void);
+
 /* in file memclear.c */
 extern	void	memclear(void);
 
